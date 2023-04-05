@@ -65,14 +65,6 @@ class HomeHeader extends Component {
                             <i class="fas fa-question-circle"></i>
                             <FormattedMessage id="homeHeader.support" />
                         </div>
-                        {/* <div className='language-vi'>
-                            <span className={appLanguage === languages.VI ? 'active' : 'none'}
-                                onClick={() => this.changeLanguage(languages.VI)}>VI</span>
-                        </div>
-                        <div className='language-en'>
-                            <span className={appLanguage === languages.EN ? 'active' : 'none'}
-                                onClick={() => this.changeLanguage(languages.EN)}>EN</span>
-                        </div> */}
                         <div className={appLanguage === languages.VI ? 'language-vi active' : 'language-vi'}>
                             <span onClick={() => this.changeLanguage(languages.VI)}>VI</span>
                         </div>
