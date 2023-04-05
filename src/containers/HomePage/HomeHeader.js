@@ -22,7 +22,7 @@ class HomeHeader extends Component {
             <div className='home-header-container'>
                 <div className='home-header-content'>
                     <div className='left-content'>
-                        <i class="fas fa-bars"></i>
+                        <i className="fas fa-bars"></i>
                         <img className='header-logo' src={logo} />
                     </div>
 
@@ -62,7 +62,7 @@ class HomeHeader extends Component {
 
                     <div className='right-content'>
                         <div className='support'>
-                            <i class="fas fa-question-circle"></i>
+                            <i className="fas fa-question-circle"></i>
                             <FormattedMessage id="homeHeader.support" />
                         </div>
                         <div className={appLanguage === languages.VI ? 'language-vi active' : 'language-vi'}>

@@ -21,20 +21,22 @@
         }
 
         .language-vi{
-            opacity: 0.8;
+            opacity: 0.7;
             &.active{
                 opacity: 1;
                 color: yellow;
+                font-weight: 900;
             }
             &:hover {
                 background-color: darken($colormain, 5);
             }
         }
         .language-en{
-            opacity: 0.8;
+            opacity: 0.7;
             &.active{
                 opacity: 1;
                 color: #04AA6D;
+                font-weight: 900;
             }
             &:hover {
                 background-color: darken($colormain, 5);
