@@ -5,7 +5,9 @@ import * as actions from "../../store/actions";
 import Navigator from '../../components/Navigator';
 import { adminMenu } from './menuApp';
 import './Header.scss';
-import { languages } from '../../utils';
+import { FormattedMessage } from 'react-intl';
+import { languages } from '../../utils'
+import { changeLanguageApp } from '../../store/actions';
 
 
 class Header extends Component {
@@ -16,11 +18,19 @@ class Header extends Component {
     render() {
         let { processLogout } = this.props;
         let appLanguage = this.props.lang;
+        let user = this.props.userInfo;
+        // console.log(this.props.userInfo);
         return (
             <div className="header-container">
                 {/* thanh navigator */}
                 <div className="header-tabs-container">
                     <Navigator menus={adminMenu} />
+                </div>
+
+                {/* Welcome text */}
+                <div className="welcome">
+                    <FormattedMessage id="homeHeader.welcome" />,
+                    {user && user.firstName ? user.firstName : ''} {user && user.lastName ? user.lastName : ''}
                 </div>
 
                 {/* doi ngon ngu + nút logout*/}
@@ -34,10 +44,6 @@ class Header extends Component {
                     </div>
                 </div>
 
-                {/* nút logout */}
-                {/* <div className="btn btn-logout" onClick={processLogout} title='Logout'>
-                    <i className="fas fa-sign-out-alt"></i>
-                </div> */}
             </div>
         );
     }
@@ -47,7 +53,8 @@ class Header extends Component {
 const mapStateToProps = state => {
     return {
         lang: state.app.language,
-        isLoggedIn: state.user.isLoggedIn
+        isLoggedIn: state.user.isLoggedIn,
+        userInfo: state.user.userInfo
     };
 };
 

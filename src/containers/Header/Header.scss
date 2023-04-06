@@ -9,6 +9,11 @@
     height: 40px;
     position: relative;
 
+    .welcome{
+        display: flex;
+        align-items: center;
+    }
+
     .languages-logout{
         display: block;
         align-items: center;

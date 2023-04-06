@@ -26,11 +26,16 @@ const editUserAPI = (data) => {
     return axios.put("/api/edit-user", data);
 }
 
+const getAllCodesAPI = (data) => {
+    return axios.get("/api/get-all-codes",
+        { params: { type: data } });
+}
 
 export {
     handleLoginAPI,
     getAllUsersAPI,
     createNewUserAPI,
     deleteUserAPI,
-    editUserAPI
+    editUserAPI,
+    getAllCodesAPI
 };
