@@ -37,7 +37,7 @@
         "address": "Address",
         "phone-number": "Phone Number",
         "gender": "Gender",
-        "position": "position",
+        "position": "Position",
         "image": "Avatar",
         "role": "Role",
         "save": "Save user"
