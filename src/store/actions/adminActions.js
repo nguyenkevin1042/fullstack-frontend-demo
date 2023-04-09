@@ -1,6 +1,9 @@
 import actionTypes from './actionTypes';
-import { getAllCodesAPI } from '../../services/userService';
-
+import {
+    getAllCodesAPI, createNewUserAPI,
+    getAllUsersAPI, deleteUserAPI, editUserAPI
+} from '../../services/userService';
+import { toast } from 'react-toastify';
 //GENDER
 export const fetchGenderStart = () => {
     return async (dispatch, getState) => {
@@ -86,3 +89,112 @@ export const fetchRoleFail = () => ({
     type: actionTypes.FETCH_ROLE_FAIL
 })
 
+//CREATE USER
+export const createNewUser = (userData) => {
+    return async (dispatch, getState) => {
+        try {
+
+            let res = await createNewUserAPI(userData);
+            if (res && res.errCode === 0) {
+                toast.success('Create user success');
+                dispatch(createUserSuccess(res.data));
+                dispatch(fetchAllUsersStart());
+            } else {
+                dispatch(createUserFail());
+            }
+            console.log("Check user: ", res)
+        } catch (error) {
+            dispatch(createUserFail());
+            console.log("createNewUser Error: ", error)
+        }
+    }
+}
+
+export const createUserSuccess = (userData) => ({
+    type: actionTypes.CREATE_USER_SUCCESS,
+    data: userData
+})
+
+export const createUserFail = () => ({
+    type: actionTypes.CREATE_USER_FAIL
+})
+
+//ALL USERS
+export const fetchAllUsersStart = () => {
+    return async (dispatch, getState) => {
+        try {
+            let res = await getAllUsersAPI();
+            if (res && res.errCode === 0) {
+                dispatch(fetchAllUsersSuccess(res.users));
+            } else {
+                dispatch(fetchAllUsersFail());
+            }
+        } catch (error) {
+            dispatch(fetchAllUsersFail());
+            console.log("fetchAllUsersStart Error: ", error)
+        }
+    }
+}
+
+export const fetchAllUsersSuccess = (userData) => ({
+    type: actionTypes.FETCH_ALL_USERS_SUCCESS,
+    users: userData
+})
+
+export const fetchAllUsersFail = () => ({
+    type: actionTypes.FETCH_ALL_USERS_FAIL
+})
+
+//DELETE USERS
+export const deleteUser = (userId) => {
+    return async (dispatch, getState) => {
+        try {
+            let res = await deleteUserAPI(userId);
+            if (res && res.errCode === 0) {
+                toast.success('Delete user success');
+                dispatch(deleteUserSuccess());
+                dispatch(fetchAllUsersStart());
+            } else {
+                dispatch(deleteUserFail());
+            }
+        } catch (error) {
+            dispatch(deleteUserFail());
+            console.log("deleteUserFail Error: ", error)
+        }
+    }
+}
+
+export const deleteUserSuccess = () => ({
+    type: actionTypes.DELETE_USER_SUCCESS
+})
+
+export const deleteUserFail = () => ({
+    type: actionTypes.DELETE_USER_FAIL
+})
+
+//UPDATE USERS
+export const updateUser = (userData) => {
+    return async (dispatch, getState) => {
+        try {
+            let res = await editUserAPI(userData);
+            if (res && res.errCode === 0) {
+                toast.success('Update user success');
+                dispatch(updateUserSuccess());
+                dispatch(fetchAllUsersStart());
+            } else {
+                dispatch(updateUserFail());
+            }
+        } catch (error) {
+            dispatch(updateUserFail());
+            console.log("updateUserFail Error: ", error)
+        }
+    }
+}
+
+export const updateUserSuccess = () => ({
+    type: actionTypes.UPDATE_USER_SUCCESS
+})
+
+export const updateUserFail = () => ({
+    type: actionTypes.UPDATE_USER_FAIL
+})
