@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { languages } from '../../../utils'
+
 
 import * as actions from "../../../store/actions";
 import { FormattedMessage } from 'react-intl';
@@ -32,7 +34,30 @@ function SamplePrevArrow(props) {
 
 class OutstandingDoctorSection extends Component {
 
+    constructor(props) {
+        super(props);
+        this.state = {
+            topDoctorsArr: []
+        }
+    }
+
+    componentDidMount() {
+        this.props.loadTopDoctors();
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if (prevProps.topDoctorsRedux !== this.props.topDoctorsRedux) {
+            this.setState({
+                topDoctorsArr: this.props.topDoctorsRedux,
+            })
+        }
+    }
+
     render() {
+        let language = this.props.lang;
+        let topDoctors = this.state.topDoctorsArr;
+        topDoctors = topDoctors.concat(topDoctors);
+        console.log('test language: ', language)
         return (
             <div className='section-share section-outstanding-doctor'>
                 <div className='section-container'>
@@ -43,7 +68,36 @@ class OutstandingDoctorSection extends Component {
 
                     <div className='section-slider'>
                         <Slider {...this.props.settings}>
-                            <div className='section-item doctor-item'>
+                            {topDoctors && topDoctors.length > 0 &&
+                                topDoctors.map((item, index) => {
+                                    let imageBase64 = '';
+                                    if (item.image) {
+                                        imageBase64 = new Buffer(item.image, 'base64').toString('binary');
+                                    }
+                                    console.log("test base64: ", imageBase64)
+                                    let textVI = item.positionData.valueVI + " " +
+                                        item.lastName + " " + item.firstName;
+                                    let textEN = item.positionData.valueEN + " " +
+                                        item.firstName + " " + item.lastName;
+                                    return (
+                                        <div key={index} className='section-item doctor-item'>
+                                            <div className='customize-border'>
+                                                <div className='bg'
+                                                    style={{
+                                                        backgroundImage: "url(" + imageBase64 + ")"
+                                                    }} />
+                                                <div className='position text-center'>
+                                                    <div className='change-color'>
+                                                        {language === languages.VI ? textVI : textEN}
+                                                    </div>
+                                                    <div>Thần kinh</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    );
+                                })
+                            }
+                            {/* <div className='section-item doctor-item'>
                                 <div className='customize-border'>
                                     <div className='bg' />
                                     <div className='position text-center'>
@@ -101,7 +155,7 @@ class OutstandingDoctorSection extends Component {
                                         <div>Thần kinh</div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> */}
                         </Slider>
                     </div>
 
@@ -117,13 +171,14 @@ class OutstandingDoctorSection extends Component {
 const mapStateToProps = state => {
     return {
         lang: state.app.language,
-        isLoggedIn: state.user.isLoggedIn
+        isLoggedIn: state.user.isLoggedIn,
+        topDoctorsRedux: state.admin.topDoctors
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
-        processLogout: () => dispatch(actions.processLogout()),
+        loadTopDoctors: (limit) => dispatch(actions.fetchTopDoctors(limit)),
     };
 };
 

@@ -31,11 +31,17 @@ const getAllCodesAPI = (data) => {
         { params: { type: data } });
 }
 
+const getTopDoctorsHomeAPI = (limitInput) => {
+    return axios.get("/api/top-doctors-home",
+        { params: { limit: limitInput } });
+}
+
 export {
     handleLoginAPI,
     getAllUsersAPI,
     createNewUserAPI,
     deleteUserAPI,
     editUserAPI,
-    getAllCodesAPI
+    getAllCodesAPI,
+    getTopDoctorsHomeAPI
 };

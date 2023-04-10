@@ -1,7 +1,8 @@
 import actionTypes from './actionTypes';
 import {
     getAllCodesAPI, createNewUserAPI,
-    getAllUsersAPI, deleteUserAPI, editUserAPI
+    getAllUsersAPI, deleteUserAPI, editUserAPI,
+    getTopDoctorsHomeAPI
 } from '../../services/userService';
 import { toast } from 'react-toastify';
 //GENDER
@@ -102,7 +103,6 @@ export const createNewUser = (userData) => {
             } else {
                 dispatch(createUserFail());
             }
-            console.log("Check user: ", res)
         } catch (error) {
             dispatch(createUserFail());
             console.log("createNewUser Error: ", error)
@@ -150,6 +150,7 @@ export const deleteUser = (userId) => {
     return async (dispatch, getState) => {
         try {
             let res = await deleteUserAPI(userId);
+
             if (res && res.errCode === 0) {
                 toast.success('Delete user success');
                 dispatch(deleteUserSuccess());
@@ -197,4 +198,31 @@ export const updateUserSuccess = () => ({
 
 export const updateUserFail = () => ({
     type: actionTypes.UPDATE_USER_FAIL
+})
+
+//TOP DOCTOR
+export const fetchTopDoctors = (limitInput) => {
+    return async (dispatch, getState) => {
+        try {
+            let res = await getTopDoctorsHomeAPI(limitInput);
+
+            if (res && res.errCode === 0) {
+                dispatch(fetchTopDoctorsSuccess(res.data));
+            } else {
+                dispatch(fetchTopDoctorsFail());
+            }
+        } catch (error) {
+            dispatch(fetchTopDoctorsFail());
+            // console.log("fetchAllUsersStart Error: ", error)
+        }
+    }
+}
+
+export const fetchTopDoctorsSuccess = (doctorsData) => ({
+    type: actionTypes.FETCH_TOP_DOCTORS_SUCCESS,
+    doctors: doctorsData
+})
+
+export const fetchTopDoctorsFail = () => ({
+    type: actionTypes.FETCH_TOP_DOCTORS_FAIL
 })

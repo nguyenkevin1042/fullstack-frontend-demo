@@ -91,6 +91,10 @@
                 font-family: 'FontAwesome' !important;
                 color: red !important;
             }
+
+            .slick-disabled{
+                display: none !important;
+            }
         }
 
     }
@@ -127,7 +131,7 @@
     
                         .bg{
                             margin: 0 auto;
-                            background: url('../../assets/doctors/doctor.jpg') center center no-repeat;
+                            // background: url('../../assets/doctors/doctor.jpg') center center no-repeat;
                             width: 120px !important;
                             height: 120px !important;
                             border-radius: 50%;
