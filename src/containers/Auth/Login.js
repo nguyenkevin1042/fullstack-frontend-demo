@@ -6,9 +6,9 @@ import { push } from "connected-react-router";
 import * as actions from "../../store/actions";
 
 import './Login.scss';
-import { FormattedMessage } from 'react-intl';
+// import { FormattedMessage } from 'react-intl';
 import { handleLoginAPI } from '../../services/userService';
-import { userLoginSuccess } from '../../store/actions';
+// import { userLoginSuccess } from '../../store/actions';
 
 class Login extends Component {
     constructor(props) {

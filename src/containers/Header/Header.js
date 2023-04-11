@@ -7,7 +7,7 @@ import { adminMenu } from './menuApp';
 import './Header.scss';
 import { FormattedMessage } from 'react-intl';
 import { languages } from '../../utils'
-import { changeLanguageApp } from '../../store/actions';
+// import { changeLanguageApp } from '../../store/actions';
 
 
 class Header extends Component {

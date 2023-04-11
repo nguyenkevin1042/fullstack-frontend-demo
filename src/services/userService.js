@@ -36,6 +36,14 @@ const getTopDoctorsHomeAPI = (limitInput) => {
         { params: { limit: limitInput } });
 }
 
+const getAllDoctorsAPI = () => {
+    return axios.get("/api/get-all-doctors");
+}
+
+const saveDoctorInforAPI = (data) => {
+    return axios.post("/api/save-doctor-information", data);
+}
+
 export {
     handleLoginAPI,
     getAllUsersAPI,
@@ -43,5 +51,7 @@ export {
     deleteUserAPI,
     editUserAPI,
     getAllCodesAPI,
-    getTopDoctorsHomeAPI
+    getTopDoctorsHomeAPI,
+    getAllDoctorsAPI,
+    saveDoctorInforAPI
 };

@@ -16,7 +16,7 @@ import Home from '../routes/Home';
 import Login from '../containers/Auth/Login';
 import System from '../routes/System';
 import HomePage from '../containers/HomePage/HomePage.js';
-import { CustomToastCloseButton } from '../components/CustomToast';
+// import { CustomToastCloseButton } from '../components/CustomToast';
 import ConfirmModal from '../components/ConfirmModal';
 
 class App extends Component {
