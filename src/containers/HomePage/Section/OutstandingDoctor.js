@@ -9,6 +9,7 @@ import Slider from "react-slick";
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { withRouter } from 'react-router';
 
 function SampleNextArrow(props) {
     const { className, style, onClick } = props;
@@ -53,11 +54,17 @@ class OutstandingDoctorSection extends Component {
         }
     }
 
+    handleViewDetailDoctor = (doctor) => {
+
+        this.props.history.push("/detail-doctor/" + doctor.id);
+
+    }
+
     render() {
         let language = this.props.lang;
         let topDoctors = this.state.topDoctorsArr;
         topDoctors = topDoctors.concat(topDoctors);
-        console.log('test language: ', language)
+
         return (
             <div className='section-share section-outstanding-doctor'>
                 <div className='section-container'>
@@ -74,13 +81,14 @@ class OutstandingDoctorSection extends Component {
                                     if (item.image) {
                                         imageBase64 = new Buffer(item.image, 'base64').toString('binary');
                                     }
-                                    console.log("test base64: ", imageBase64)
+
                                     let textVI = item.positionData.valueVI + " " +
                                         item.lastName + " " + item.firstName;
                                     let textEN = item.positionData.valueEN + " " +
                                         item.firstName + " " + item.lastName;
                                     return (
-                                        <div key={index} className='section-item doctor-item'>
+                                        <div key={index} className='section-item doctor-item'
+                                            onClick={() => this.handleViewDetailDoctor(item)}>
                                             <div className='customize-border'>
                                                 <div className='bg'
                                                     style={{
@@ -182,4 +190,4 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(OutstandingDoctorSection);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(OutstandingDoctorSection));
