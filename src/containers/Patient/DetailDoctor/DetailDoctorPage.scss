@@ -15,7 +15,6 @@
         .content-right{
             height: 100px;
             width: 70%;
-            border: 1px solid yellow;
             padding: 10px;
 
             .up{
@@ -29,6 +28,19 @@
     }
 
     .detail-info-doctor{
-        margin: 10px 100px;
+        padding: 30px 100px;
+        border: 1px solid red;
+        background-color: #f9f9f9;
+
+        h1,h2,h3,h4,h5,h6{
+            padding: 5px;
+        }
+        
+        ul{
+            li{
+                font-size: 18px;
+                padding: 5px;
+            }
+        }
     }
 }
