@@ -7,6 +7,7 @@ const initialState = {
     allUsers: [],
     topDoctors: [],
     allDoctors: [],
+    allScheduleTime: [],
     isLoadingGenders: false
 }
 
@@ -88,6 +89,18 @@ const adminReducer = (state = initialState, action) => {
             state.allDoctors = [];
             return {
                 ...state
+            }
+        //CODE TIME
+        case actionTypes.FETCH_ALLCODE_TIME_SUCCESS:
+            state.allScheduleTime = action.time;
+            return {
+                ...state
+            }
+        case actionTypes.FETCH_ALLCODE_TIME_FAIL:
+            state.roles = [];
+            return {
+                ...state
+
             }
         default:
             return state;

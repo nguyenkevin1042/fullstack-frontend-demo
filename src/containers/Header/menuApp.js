@@ -14,13 +14,19 @@ export const adminMenu = [
                 name: 'menu.admin.manage-doctor',
                 link: '/system/manage-doctor'
             },
-            {
-                name: 'menu.admin.manage-admin',
-                link: '/system/user-admin'
+            // {
+            //     name: 'menu.doctor.schedule',
+            //     link: '/system/user-manage'
+            // }
+
+            { //Quản lý kế hoạch khám bệnh
+                name: 'menu.doctor.schedule',
+                link: '/doctor/manage-schedule'
             }
 
         ]
     },
+
     { //Quản lý phòng khám
         name: 'menu.admin.clinic',
         menus: [
@@ -46,6 +52,19 @@ export const adminMenu = [
                 name: 'menu.admin.manage-handbook',
                 link: '/system/manage-handbook'
             }
+        ]
+    }
+];
+
+export const doctorMenu = [
+    { //Quản lý kế hoạch khám bệnh
+        name: 'menu.admin.manage-user',
+        menus: [
+            {
+                name: 'menu.doctor.manage-schedule',
+                link: '/doctor/manage-schedule'
+            }
+
         ]
     }
 ];

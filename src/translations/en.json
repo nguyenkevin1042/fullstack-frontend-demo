@@ -24,6 +24,9 @@
             "manage-specialty": "Manage Specialty",
             "handbook": "Handbook",
             "manage-handbook": "Manage Handbook"
+        },
+        "doctor": {
+            "manage-schedule": "Manage Schedule"
         }
     },
     "manage-user-redux": {
@@ -41,5 +44,11 @@
         "image": "Avatar",
         "role": "Role",
         "save": "Save user"
+    },
+    "manage-schedule": {
+        "title": "Manage Doctor's Schedule",
+        "chooseDoctor": "Choose Doctor",
+        "chooseDate": "Choose Date",
+        "saveSchedule": "Save Schedule"
     }
 }

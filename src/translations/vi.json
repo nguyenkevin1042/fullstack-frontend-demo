@@ -24,6 +24,9 @@
             "manage-specialty": "Quản lý chuyên khoa",
             "handbook": "Cẩm nang",
             "manage-handbook": "Quản lý cẩm nang"
+        },
+        "doctor": {
+            "manage-schedule": "Quản lý kế hoạch khám bệnh"
         }
     },
     "manage-user-redux": {
@@ -41,5 +44,11 @@
         "image": "Hình ảnh",
         "role": "Vị trí",
         "save": "Lưu"
+    },
+    "manage-schedule": {
+        "title": "Quản lý kế hoạch khám bệnh",
+        "chooseDoctor": "Chọn bác sĩ",
+        "chooseDate": "Chọn ngày",
+        "saveSchedule": "Lưu lịch khám"
     }
 }

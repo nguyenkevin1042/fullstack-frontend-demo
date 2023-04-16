@@ -1,10 +1,13 @@
+import { doctorMenu } from "../containers/Header/menuApp";
+
 export const path = {
     HOME: '/',
     HOMEPAGE: '/home',
     LOGIN: '/login',
     LOG_OUT: '/logout',
     SYSTEM: '/system',
-    DETAIL_DOCTOR: '/detail-doctor/:id'
+    DETAIL_DOCTOR: '/detail-doctor/:id',
+    MANAGE_SCHEDULE: '/doctor/manage-schedule'
 };
 
 export const languages = {
@@ -17,6 +20,12 @@ export const crudActions = {
     EDIT: "EDIT",
     DELETE: "DELETE",
     READ: "READ"
+};
+
+export const userRole = {
+    ADMIN: 'R1',
+    DOCTOR: 'R2',
+    PATIENT: 'R3'
 };
 
 export const dateFormat = {

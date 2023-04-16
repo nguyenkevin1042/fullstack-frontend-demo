@@ -68,6 +68,12 @@ class Login extends Component {
         });
     }
 
+    handleKeyDown = (event) => {
+        if (event.key === "Enter") {
+            this.handleLogin();
+        }
+    }
+
 
     render() {
         return (
@@ -79,12 +85,18 @@ class Login extends Component {
                         </div>
                         <div className='col-12 form-group login-input'>
                             <label>Email</label>
-                            <input type='text' className='form-control' placeholder='Enter your email' value={this.state.email} onChange={(event) => this.handleOnChangeEmailInput(event)} />
+                            <input type='text'
+                                className='form-control'
+                                placeholder='Enter your email'
+                                value={this.state.email}
+                                onChange={(event) => this.handleOnChangeEmailInput(event)}
+                                onKeyDown={(event) => { this.handleKeyDown(event) }} />
                         </div>
                         <div className='col-12 form-group login-input'>
                             <label>Password</label>
                             <div className='custom-input-password'>
-                                <input type={this.state.isShowed ? 'text' : 'password'} className='form-control' placeholder='Enter your password' value={this.state.password} onChange={(event) => this.handleOnChangePasswordInput(event)} />
+                                <input type={this.state.isShowed ? 'text' : 'password'} className='form-control' placeholder='Enter your password' value={this.state.password} onChange={(event) => this.handleOnChangePasswordInput(event)}
+                                    onKeyDown={(event) => { this.handleKeyDown(event) }} />
                                 <span onClick={() => this.handleShowHidePassword()}>
                                     <i className={this.state.isShowed ? "far fa-eye show-hide-icon" : "far fa-eye-slash show-hide-icon"}></i>
                                 </span>
@@ -95,7 +107,9 @@ class Login extends Component {
                             {this.state.message}
                         </div>
                         <div className='col-12'>
-                            <button className='login-btn' onClick={(event) => { this.handleLogin(event) }}>Log in</button>
+                            <button className='login-btn'
+                                onClick={(event) => { this.handleLogin(event) }}
+                            >Log in</button>
                         </div>
 
                         <div className='col-12'>
