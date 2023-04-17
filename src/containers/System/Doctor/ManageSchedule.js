@@ -10,6 +10,7 @@ import FormattedDate from "../../../components/Formating/FormattedDate"
 import * as actions from "../../../store/actions";
 import { toast } from 'react-toastify';
 import _ from 'lodash';
+import { saveBulkScheduleAPI } from '../../../services/userService';
 
 class ManageSchedule extends Component {
     constructor(props) {
@@ -18,7 +19,8 @@ class ManageSchedule extends Component {
             selectedDoctor: [],
             listDoctors: [],
             currentDate: new Date(),
-            rangeTime: []
+            rangeTime: [],
+            schedule: []
         };
     }
 
@@ -99,12 +101,12 @@ class ManageSchedule extends Component {
 
     }
 
-    handleSaveSchedule = () => {
+    handleSaveSchedule = async () => {
         let { rangeTime, selectedDoctor, currentDate } = this.state;
-        let selectedTime = [], result = [];
-        let fomattedDate = moment(currentDate).format(dateFormat.SEND_TO_SERVER)
-        console.log("result before: ", result)
+        let selectedTime = [];
 
+        let fomattedDate = new Date(currentDate).getTime();
+        console.log('fomattedDate: ', fomattedDate)
         if (selectedDoctor && _.isEmpty(selectedDoctor)) {
             toast.error('Missing doctor');
             return;
@@ -112,39 +114,24 @@ class ManageSchedule extends Component {
 
         if (!currentDate) {
             toast.error('Invalid Date');
+            return;
         }
 
         if (rangeTime && rangeTime.length > 0) {
             selectedTime = rangeTime.filter(item => item.isSelected === true)
         }
 
-        //check and set final result
-        if (selectedTime && selectedTime.length > 0) {
-            selectedTime.map(item => {
-                let obj = [];
-                obj.doctorId = selectedDoctor.key;
-                obj.date = fomattedDate;
-                obj.time = item.keyMap;
-                result.push(obj)
-            })
-        } else {
-            toast.error('Invalid Time Schedule');
-            return;
-        }
+        let res = await saveBulkScheduleAPI({
+            selectedTime: selectedTime,
+            doctorId: selectedDoctor.key,
+            date: fomattedDate
+        });
 
-        console.log("result after: ", result)
-
-        // console.lo"handleSaveSchedule", this.state)
-        // console.log("selectedDoctor", selectedDoctor)
-        // console.log("rangeTime", rangeTime)
-
-        // console.log("currentDate", fomattedDate)
     }
 
     render() {
         let { rangeTime } = this.state;
         let language = this.props.lang;
-
         return (
             <React.Fragment>
                 <div className='manage-schedule-container'>

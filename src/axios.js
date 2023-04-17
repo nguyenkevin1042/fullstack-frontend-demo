@@ -12,6 +12,7 @@ instance.interceptors.response.use(
         const { data } = response;
 
         return response.data;
+        // return data;
     });
 
 export default instance;
