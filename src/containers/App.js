@@ -12,7 +12,7 @@ import { userIsAuthenticated, userIsNotAuthenticated } from '../hoc/authenticati
 import { path } from '../utils'
 
 import Home from '../routes/Home';
-import DetailDoctorPage from './Patient/DetailDoctor/DetailDoctorPage';
+import DetailDoctorPage from './Patient/Doctor/DetailDoctorPage';
 // import Login from '../routes/Login';
 import Login from '../containers/Auth/Login';
 import System from '../routes/System';

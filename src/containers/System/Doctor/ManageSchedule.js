@@ -124,7 +124,7 @@ class ManageSchedule extends Component {
         let res = await saveBulkScheduleAPI({
             selectedTime: selectedTime,
             doctorId: selectedDoctor.key,
-            date: fomattedDate
+            date: fomattedDate + ''
         });
 
     }

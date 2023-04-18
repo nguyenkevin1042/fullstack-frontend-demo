@@ -6,6 +6,7 @@ import './DetailDoctorPage.scss';
 import { getDetailDoctorAPI } from '../../../services/userService';
 // import * as actions from "../store/actions";
 import { languages } from '../../../utils'
+import DoctorSchedulePage from './DoctorSchedulePage';
 
 
 
@@ -28,7 +29,6 @@ class DetailDoctorPage extends Component {
                     doctorState: res.data
                 })
             }
-            console.log(this.state)
         }
     }
 
@@ -78,7 +78,15 @@ class DetailDoctorPage extends Component {
                     </div>
 
                     <div className='schedule-doctor'>
+                        <div className='content-left'>
+                            <DoctorSchedulePage
+                                doctorIdFromDetailDoctorPage={
+                                    doctor && doctor.id ? doctor.id : -1} />
+                        </div>
+                        <div className='content-right'>
 
+
+                        </div>
 
                     </div>
 
