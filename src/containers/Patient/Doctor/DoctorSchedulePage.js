@@ -2,6 +2,7 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import Select from 'react-select';
 import './DoctorSchedulePage.scss';
+import { FormattedMessage } from 'react-intl';
 // import * as actions from "../store/actions";
 import { languages } from '../../../utils'
 import moment from 'moment';
@@ -20,17 +21,40 @@ class DoctorSchedulePage extends Component {
     }
 
     componentDidMount() {
-        this.setDateForAllDaysState()
+        let allDaysArr = this.getDateForAllDaysState()
+
+        this.setState({
+            allDays: allDaysArr
+        })
+
+
     }
 
-    componentDidUpdate(prevProps, prevState, snapshot) {
+    async componentDidUpdate(prevProps, prevState, snapshot) {
         if (prevProps.lang !== this.props.lang) {
-            this.setDateForAllDaysState()
+            this.setState({
+                allDays: this.getDateForAllDaysState()
+            })
+        }
+
+        if (prevProps.doctorIdFromDetailDoctorPage !== this.props.doctorIdFromDetailDoctorPage) {
+            let allDaysArr = this.getDateForAllDaysState()
+
+
+            let doctorId = this.props.doctorIdFromDetailDoctorPage;
+            let date = allDaysArr[0].value;
+            let res = await getDoctorScheduleByIdAndDateAPI(doctorId, date)
+
+            this.setState({
+                allAvailableTime: res.data ? res.data : []
+            })
+
+            console.log(allDaysArr, doctorId, date)
         }
 
     }
 
-    setDateForAllDaysState = async () => {
+    getDateForAllDaysState = () => {
         let currentDate = new Date();
         let arrDate = [];
         let language = this.props.lang;
@@ -38,19 +62,32 @@ class DoctorSchedulePage extends Component {
         for (let index = 0; index < 7; index++) {
             let obj = {};
             if (language === languages.VI) {
+                // if (index === 0) {
+                //     let date = moment(new Date()).format(' - DD/MM');
+                //     let labelVI = "Hôm nay" + date;
+                //     obj.label = labelVI;
+                // } else {
+                // let labelVI = moment(currentDate).add(index, 'days').format('dddd - DD/MM')
+                // obj.label = this.capitalizeFirstLetter(labelVI);
+                // }
                 let labelVI = moment(currentDate).add(index, 'days').format('dddd - DD/MM')
                 obj.label = this.capitalizeFirstLetter(labelVI);
+
             } else {
                 obj.label = moment(currentDate).add(index, 'days').locale('en').format('dddd - DD/MM')
+                // if (index === 0) {
+                //     let date = moment(new Date()).format(' - DD/MM');
+                //     let labelEN = "Today" + date;
+                //     obj.label = labelEN;
+                // } else {
+                //     obj.label = moment(currentDate).add(index, 'days').locale('en').format('dddd - DD/MM')
+                // }
             }
-
-            obj.value = moment(currentDate).add(index, 'days').startOf('day').valueOf()
+            obj.value = moment(currentDate).add(index, 'days').startOf('day').valueOf();
             arrDate.push(obj)
         }
 
-        this.setState({
-            allDays: arrDate
-        })
+        return arrDate;
     }
 
     handleOnChangeSelect = async (event) => {
@@ -69,7 +106,7 @@ class DoctorSchedulePage extends Component {
                 })
             }
 
-            console.log("check state allAvailableTime: ", this.state.allAvailableTime)
+            console.log("check res: ", doctorId, date)
 
         }
     }
@@ -100,20 +137,44 @@ class DoctorSchedulePage extends Component {
 
                 <div className='all-available-time'>
                     <div className='text-calendar'>
-                        <span><i className='fas fa-calendar-alt'></i>Lịch khám</span>
+                        <span>
+                            <i className='fas fa-calendar-alt'></i>
+                            <FormattedMessage id="patient.detail-doctor.schedule" />
+                        </span>
                     </div>
 
                     <div className='time-content'>
                         {allAvailableTime && allAvailableTime.length > 0 ?
-                            allAvailableTime.map((item, index) => {
-                                let timeVI = item.timeTypeData.valueVI;
-                                let timeEN = item.timeTypeData.valueEN;
-                                return (
-                                    <button key={index}>
-                                        {language === languages.VI ? timeVI : timeEN}
-                                    </button>
-                                )
-                            }) : "Bác sĩ không có lịch hẹn"
+                            <Fragment>
+                                <div className='time-content-buttons'>
+                                    {
+                                        allAvailableTime.map((item, index) => {
+                                            let timeVI = item.timeTypeData.valueVI;
+                                            let timeEN = item.timeTypeData.valueEN;
+                                            return (
+                                                <button key={index}
+                                                    className=''>
+                                                    {language === languages.VI ? timeVI : timeEN}
+                                                </button>
+                                            )
+                                        })
+                                    }
+                                </div>
+                                <div className='book-free'>
+                                    <span>
+                                        <FormattedMessage id='patient.detail-doctor.choose' />
+                                        <i className='far fa-hand-point-up' />
+                                        <FormattedMessage id='patient.detail-doctor.book-free' />
+                                    </span>
+                                </div>
+
+                            </Fragment>
+                            :
+
+                            <div className='no-schedule'>
+                                <FormattedMessage id="patient.detail-doctor.no-schedule" />
+                            </div>
+
                         }
                     </div>
                 </div>

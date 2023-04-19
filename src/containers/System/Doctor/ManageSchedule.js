@@ -127,11 +127,19 @@ class ManageSchedule extends Component {
             date: fomattedDate + ''
         });
 
+        if (res && res.errCode === 0) {
+            toast.success("Save Schedule success")
+        } else {
+            toast.error("Save Schedule fail")
+        }
+
     }
 
     render() {
         let { rangeTime } = this.state;
         let language = this.props.lang;
+        let yesterday = new Date(new Date().setDate(new Date().getDate() - 1));
+
         return (
             <React.Fragment>
                 <div className='manage-schedule-container'>
@@ -162,7 +170,7 @@ class ManageSchedule extends Component {
                                         onChange={this.handleOnChangeDatePicker}
                                         value={this.state.currentDate}
                                         // selected={this.state.currentDate}
-                                        minDate={new Date()} />
+                                        minDate={yesterday} />
                                 </div>
 
                             </div>
