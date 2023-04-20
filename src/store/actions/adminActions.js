@@ -215,7 +215,7 @@ export const fetchTopDoctors = (limitInput) => {
             }
         } catch (error) {
             dispatch(fetchTopDoctorsFail());
-            // console.log("fetchAllUsersStart Error: ", error)
+            console.log("fetchTopDoctors Error: ", error)
         }
     }
 }
@@ -306,4 +306,41 @@ export const fetchAllCodeTimeSuccess = (timeData) => ({
 
 export const fetchAllCodeTimeFail = () => ({
     type: actionTypes.FETCH_ALLCODE_TIME_FAIL
+})
+
+//  GET ALLCODE PRICE PAYMENT PROVINCE
+export const getRequiredDoctorInfo = () => {
+    return async (dispatch, getState) => {
+        try {
+            let resPrice = await getAllCodesAPI('price');
+            let resPayment = await getAllCodesAPI('payment');
+            let resProvince = await getAllCodesAPI('province');
+            if (resPrice && resPrice.errCode === 0 &&
+                resPayment && resPayment.errCode === 0 &&
+                resProvince && resProvince.errCode === 0) {
+                let data = {
+                    resPrice: resPrice.data,
+                    resPayment: resPayment.data,
+                    resProvince: resProvince.data
+                }
+                dispatch(getRequiredDoctorInfoSuccess(data));
+            } else {
+                dispatch(getRequiredDoctorInfoFail());
+            }
+        } catch (error) {
+            dispatch(getRequiredDoctorInfoFail());
+            console.log("getRequiredDoctorInfo Error: ", error)
+        }
+    }
+}
+
+export const getRequiredDoctorInfoSuccess = (data) => ({
+    type: actionTypes.FETCH_DOCTOR_INFO_SUCCESS,
+    price: data.resPrice,
+    payment: data.resPayment,
+    province: data.resProvince
+})
+
+export const getRequiredDoctorInfoFail = () => ({
+    type: actionTypes.FETCH_DOCTOR_INFO_FAIL
 })

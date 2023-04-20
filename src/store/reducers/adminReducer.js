@@ -8,6 +8,9 @@ const initialState = {
     topDoctors: [],
     allDoctors: [],
     allScheduleTime: [],
+    allPrices: [],
+    allPayments: [],
+    allProvinces: [],
     isLoadingGenders: false
 }
 
@@ -98,6 +101,20 @@ const adminReducer = (state = initialState, action) => {
             }
         case actionTypes.FETCH_ALLCODE_TIME_FAIL:
             state.roles = [];
+            return {
+                ...state
+
+            }
+        //ALLCODE PRICE PAYMENT PROVINCE
+        case actionTypes.FETCH_DOCTOR_INFO_SUCCESS:
+            state.allPrices = action.price;
+            state.allPayments = action.payment;
+            state.allProvinces = action.province;
+            return {
+                ...state
+            }
+        case actionTypes.FETCH_DOCTOR_INFO_FAIL:
+            state.allProvinces = [];
             return {
                 ...state
 
