@@ -64,7 +64,13 @@
             "title": "Create Doctor's Information",
             "choose-doctor": "Choose Doctor",
             "intro": "Doctor's Information",
-            "save-info": "Save Doctor's Information"
+            "save-info": "Save Doctor's Information",
+            "choose-price": "Price",
+            "choose-payment": "Payment",
+            "choose-province": "Province",
+            "clinic-name": "Clinic Name",
+            "clinic-address": "Clinic Address",
+            "note": "Note"
         }
     }
 }

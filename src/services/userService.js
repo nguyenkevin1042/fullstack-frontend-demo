@@ -41,6 +41,7 @@ const getAllDoctorsAPI = () => {
 }
 
 const saveDoctorInforAPI = (data) => {
+    console.log(data)
     return axios.post("/api/save-doctor-information", data);
 }
 
