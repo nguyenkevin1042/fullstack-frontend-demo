@@ -105,17 +105,54 @@ class ManageDoctor extends Component {
 
     handleChange = async (selectedDoctor) => {
         let res = await getDetailDoctorAPI(selectedDoctor.key);
+        let { listPrice, listPayment, listProvince } = this.state
 
         if (res && res.errCode === 0 && res.data && res.data.Markdown
             && res.data.Markdown.contentHTML != null
             && res.data.Markdown.contentMarkdown != null
             && res.data.Markdown.description != null) {
             let markdown = res.data.Markdown;
+
+
+            console.log(res.data.Doctor_Infor)
+            let resAddressClinic = '', resNameClinic = '',
+                resNote = '', resPriceId = '',
+                resPaymentId = '', resProvinceId = '',
+                resSelectedPrice = '', resSelectedPayment = '',
+                resSelectedProvince = '';
+            if (res.data.Doctor_Infor) {
+                resAddressClinic = res.data.Doctor_Infor.addressClinic;
+                resNameClinic = res.data.Doctor_Infor.nameClinic;
+                resNote = res.data.Doctor_Infor.note;
+                resPriceId = res.data.Doctor_Infor.priceId;
+                resPaymentId = res.data.Doctor_Infor.paymentId;
+                resProvinceId = res.data.Doctor_Infor.provinceId;
+
+                resSelectedPrice = listPrice.find(item => {
+                    return item && item.key === resPriceId
+                })
+
+                resSelectedPayment = listPayment.find(item => {
+                    return item && item.key === resPaymentId
+                })
+
+                resSelectedProvince = listProvince.find(item => {
+                    return item && item.key === resProvinceId
+                })
+            }
+
+
             this.setState({
                 doctorId: res.data.id,
                 contentHTML: markdown.contentHTML,
                 contentMarkdown: markdown.contentMarkdown,
                 description: markdown.description,
+                selectedPrice: resSelectedPrice,
+                selectedPayment: resSelectedPayment,
+                selectedProvince: resSelectedProvince,
+                nameClinic: resAddressClinic,
+                addressClinic: resAddressClinic,
+                note: resNote,
                 hasOldData: true
             });
         } else {
@@ -124,21 +161,23 @@ class ManageDoctor extends Component {
                 contentHTML: '',
                 contentMarkdown: '',
                 description: '',
+                selectedPrice: '',
+                selectedPayment: '',
+                selectedProvince: '',
+                nameClinic: '',
+                addressClinic: '',
+                note: '',
                 hasOldData: false
             });
         }
+        console.log(this.state)
     }
 
     handleChangeSelectDoctorInfor = (selectedOption, name) => {
-        // console.log("check handleChangeSelectDoctorInfor: ",
-        //     selectedOption, name);
         let stateName = name.name;
         let stateCopy = { ...this.state };
         stateCopy[stateName] = selectedOption;
         this.setState({ ...stateCopy });
-
-        // console.log("check stateCopy: ", stateCopy);
-        // console.log("check state: ", this.state);
     }
 
     handleOnChangeText = (event, id) => {
@@ -147,12 +186,6 @@ class ManageDoctor extends Component {
         this.setState({
             ...stateCopy
         });
-
-        // console.log("check stateCopy: ", stateCopy);
-        // console.log("check state: ", this.state);
-        // this.setState({
-        //     description: event.target.value
-        // })
     }
 
     buildDataInputSelect = (inputData, type) => {

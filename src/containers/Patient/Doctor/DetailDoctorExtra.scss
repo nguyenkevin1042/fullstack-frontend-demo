@@ -1,0 +1,108 @@
+.detail-doctor-extra-container{
+    border-left: 1px solid #eee;
+    padding-left: 30px;
+    .up{
+        .text-address{
+            text-transform: uppercase;
+            font-size: 16px;
+            color: #666;
+            font-weight: bold;
+        }
+        .text-name-clinic{
+            font-weight: bold;
+            padding: 10px 0;
+        }
+        .text-address-clinic{
+            padding-bottom: 15px;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+    }
+
+    .down{
+        .text-price{
+            padding-bottom: 15px;
+            margin-bottom: 15px;
+
+            .text-price-title{
+                text-transform: uppercase;
+                font-size: 16px;
+                color: #666;
+                font-weight: bold;
+            }
+            .text-price-price{
+                margin: 0 10px;
+                font-size: 15px;
+ 
+            }
+            .text-price-more-details{
+                text-decoration: none;
+                font-size: 15px;
+                color: #45c3d2;
+                &:hover{
+                    cursor: pointer;
+                }
+            }
+            
+           
+        }
+
+        .title{
+            text-transform: uppercase;
+            font-size: 16px;
+            color: #666;
+            font-weight: bold;
+            text-align: left;
+            margin-bottom: 15px;
+        }
+
+        .details{
+            border: 1px solid #ddd;
+            padding: 2px;
+            margin-bottom: 10px;
+            background: #eee;
+            // background: #f8f8f8;
+
+            .details-info{     
+                background: #f8f8f8;
+                border: 1px solid #ddd;
+                padding: 3px;
+                .details-price{
+                    display: flex;
+                    justify-content: space-between;
+
+                    .left{
+                    
+                    }
+        
+                    .right{
+                        margin-top: 10px;
+                    }
+                }
+
+                .details-price-foreigner{
+                    width: 85%;
+                    color: #666;
+                }
+                
+            }
+            
+            .payment-info{
+                padding: 5px 10px;
+            }
+
+            
+        }
+
+        .text-hide-price{
+            text-decoration: none;
+            font-size: 17px;
+            color: #45c3d2;
+
+            &:hover{
+                cursor: pointer;
+            }
+        }
+
+    }
+}

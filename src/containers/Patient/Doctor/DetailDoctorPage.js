@@ -7,6 +7,7 @@ import { getDetailDoctorAPI } from '../../../services/userService';
 // import * as actions from "../store/actions";
 import { languages } from '../../../utils'
 import DoctorSchedulePage from './DoctorSchedulePage';
+import DetailDoctorExtra from './DetailDoctorExtra.js';
 
 
 
@@ -89,7 +90,7 @@ class DetailDoctorPage extends Component {
                                 doctorIdFromDetailDoctorPage={this.state.currentDoctorId} />
                         </div>
                         <div className='content-right'>
-
+                            <DetailDoctorExtra />
 
                         </div>
 
