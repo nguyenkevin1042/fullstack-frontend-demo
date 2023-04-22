@@ -57,6 +57,12 @@
             "no-schedule": "Bác sĩ không có lịch hẹn trong ngày này",
             "choose": "Chọn ",
             "book-free": " và đặt miễn phí"
+        },
+        "extra-info": {
+            "address": "Địa chỉ khám",
+            "price": "Giá khám",
+            "more-details": "Xem chi tiết",
+            "hide-details": "Ẩn chi tiết"
         }
     },
     "admin": {

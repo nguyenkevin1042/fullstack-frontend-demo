@@ -90,7 +90,8 @@ class DetailDoctorPage extends Component {
                                 doctorIdFromDetailDoctorPage={this.state.currentDoctorId} />
                         </div>
                         <div className='content-right'>
-                            <DetailDoctorExtra />
+                            <DetailDoctorExtra
+                                doctorIdFromDetailDoctorPage={this.state.currentDoctorId} />
 
                         </div>
 

@@ -150,7 +150,7 @@ class ManageDoctor extends Component {
                 selectedPrice: resSelectedPrice,
                 selectedPayment: resSelectedPayment,
                 selectedProvince: resSelectedProvince,
-                nameClinic: resAddressClinic,
+                nameClinic: resNameClinic,
                 addressClinic: resAddressClinic,
                 note: resNote,
                 hasOldData: true

@@ -57,6 +57,12 @@
             "no-schedule": "This doctor does not have schedule on this day",
             "choose": "Choose ",
             "book-free": " and book free"
+        },
+        "extra-info": {
+            "address": "Address",
+            "price": "Price",
+            "more-details": "More details",
+            "hide-details": "Hide details"
         }
     },
     "admin": {

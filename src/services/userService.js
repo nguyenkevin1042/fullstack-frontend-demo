@@ -61,18 +61,24 @@ const getDoctorScheduleByIdAndDateAPI = (doctorId, date) => {
 
 }
 
+const getExtraInfoByIdAPI = (doctorId) => {
+    return axios.get("/api/get-extra-info-by-id",
+        { params: { doctorId: doctorId } });
+}
+
+const getProfileDoctorByIdAPI = (doctorId) => {
+    return axios.get("/api/get-profile-doctor-by-id",
+        { params: { doctorId: doctorId } });
+
+}
+
 
 export {
-    handleLoginAPI,
-    getAllUsersAPI,
-    createNewUserAPI,
-    deleteUserAPI,
-    editUserAPI,
-    getAllCodesAPI,
-    getTopDoctorsHomeAPI,
-    getAllDoctorsAPI,
-    saveDoctorInforAPI,
-    getDetailDoctorAPI,
-    saveBulkScheduleAPI,
-    getDoctorScheduleByIdAndDateAPI
+    handleLoginAPI, getAllUsersAPI, createNewUserAPI,
+    deleteUserAPI, editUserAPI,
+    getAllCodesAPI, getTopDoctorsHomeAPI,
+    getAllDoctorsAPI, saveDoctorInforAPI,
+    getDetailDoctorAPI, saveBulkScheduleAPI,
+    getDoctorScheduleByIdAndDateAPI, getExtraInfoByIdAPI,
+    getProfileDoctorByIdAPI
 };

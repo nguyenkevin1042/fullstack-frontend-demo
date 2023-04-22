@@ -1,0 +1,68 @@
+.booking-model-container{
+    display: flex;
+    flex-direction: row;
+    .booking-model-content{
+        height:100%;
+        padding: 20px;
+        
+
+        .booking-model-header{
+            height: 50px;
+            border-bottom: 1px solid #ddd;
+            padding: 0 15px 15px 15px;
+
+            .left{
+                text-transform: uppercase;
+                text-align: center;
+                font-weight: 600;
+                font-size: 20px;
+            }
+
+            .right{
+                cursor: pointer;
+                float: right;
+
+                &:hover{
+                    opacity: 0.7;
+                }
+            }               
+        }
+
+        .booking-model-body{
+            padding-top: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .booking-model-footer{
+            display: flex;
+            justify-content: flex-end;
+padding-top: 10px;
+            padding-right: 20px;
+
+            button{
+               border-radius: 5px;
+               text-align: center;
+               padding: 5px 15px;
+               margin: 0 10px;
+                &:hover{
+                    opacity: 0.7;
+                }
+            }
+
+            .btn-add{
+                color: #fff;
+                background-color: #007bff;
+                border-color: #007bff;
+            }
+
+            .btn-cancel{
+                color: #fff;
+                background-color: #6c757d;
+                border-color: #6c757d;
+            }
+        }
+
+    }
+    
+}
