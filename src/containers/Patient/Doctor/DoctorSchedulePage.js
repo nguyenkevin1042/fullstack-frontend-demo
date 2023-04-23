@@ -70,26 +70,12 @@ class DoctorSchedulePage extends Component {
         for (let index = 0; index < 7; index++) {
             let obj = {};
             if (language === languages.VI) {
-                // if (index === 0) {
-                //     let date = moment(new Date()).format(' - DD/MM');
-                //     let labelVI = "Hôm nay" + date;
-                //     obj.label = labelVI;
-                // } else {
-                // let labelVI = moment(currentDate).add(index, 'days').format('dddd - DD/MM')
-                // obj.label = this.capitalizeFirstLetter(labelVI);
-                // }
                 let labelVI = moment(currentDate).add(index, 'days').format('dddd - DD/MM')
                 obj.label = this.capitalizeFirstLetter(labelVI);
 
             } else {
                 obj.label = moment(currentDate).add(index, 'days').locale('en').format('dddd - DD/MM')
-                // if (index === 0) {
-                //     let date = moment(new Date()).format(' - DD/MM');
-                //     let labelEN = "Today" + date;
-                //     obj.label = labelEN;
-                // } else {
-                //     obj.label = moment(currentDate).add(index, 'days').locale('en').format('dddd - DD/MM')
-                // }
+
             }
             obj.value = moment(currentDate).add(index, 'days').startOf('day').valueOf();
             arrDate.push(obj)
@@ -131,6 +117,7 @@ class DoctorSchedulePage extends Component {
             isModalOpened: true,
             timeData: item
         })
+
     }
 
     handleCloseBookingModel = () => {

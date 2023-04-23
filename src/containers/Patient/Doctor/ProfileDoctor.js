@@ -5,7 +5,8 @@ import './ProfileDoctor.scss';
 import { languages } from '../../../utils'
 import NumericFormat from 'react-number-format';
 import { getProfileDoctorByIdAPI } from '../../../services/userService';
-
+import _ from 'lodash';
+import moment from 'moment';
 
 class ProfileDoctor extends Component {
     constructor(props) {
@@ -21,7 +22,7 @@ class ProfileDoctor extends Component {
         this.setState({
             profileData: data
         })
-        console.log("check state: ", this.state)
+
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
@@ -46,11 +47,42 @@ class ProfileDoctor extends Component {
         return result;
     }
 
+    capitalizeFirstLetter = (string) => {
+        return string.charAt(0).toUpperCase() + string.slice(1);
+    }
+
+    // render
+    renderTimeBooking = (timeData) => {
+        let language = this.props.lang;
+        let date = '';
+        let time = '';
+
+        if (timeData && !_.isEmpty(timeData)) {
+            date = language === languages.VI ?
+                moment.unix(timeData.date / 1000).format('dddd - DD/MM/YYYY')
+                :
+                moment.unix(timeData.date / 1000).locale('en').format('ddd - MM/DD/YYYY');
+            time = language === languages.VI ?
+                timeData.timeTypeData.valueVI : timeData.timeTypeData.valueEN;
+            ;
+
+        }
+
+        return (
+            <>
+                <div>{time} - {this.capitalizeFirstLetter(date)}</div>
+            </>
+        )
+
+    }
+
 
     render() {
         let { profileData } = this.state;
         let doctorInfor = profileData.Doctor_Infor;
+        let { isShowDescription, timeData } = this.props;
         let language = this.props.lang;
+
         let doctorImg = profileData && profileData.image ? profileData.image : '';
         let textVI = "";
         let textEN = "";
@@ -60,8 +92,6 @@ class ProfileDoctor extends Component {
             textEN += profileData.positionData.valueEN + " " +
                 profileData.firstName + " " + profileData.lastName;
         }
-
-        console.log("check profileData: ", profileData)
 
         return (
             <div className='profile-doctor-container'>
@@ -79,10 +109,20 @@ class ProfileDoctor extends Component {
                             {language === languages.VI ? textVI : textEN}
                         </div>
                         <div className='down'>
-                            {
-                                profileData.Markdown && profileData.Markdown.description &&
-                                <span>{profileData.Markdown.description}</span>
+                            {isShowDescription === true ?
+                                <>
+                                    {
+                                        profileData.Markdown && profileData.Markdown.description &&
+                                        <span>{profileData.Markdown.description}</span>
+                                    }
+                                </>
+                                :
+                                <>
+                                    {this.renderTimeBooking(timeData)}
+                                </>
                             }
+
+
                         </div>
                     </div>
 

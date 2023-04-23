@@ -38,7 +38,6 @@ class BookingModel extends Component {
         let { isModelClose, timeData } = this.props;
         let doctorId = timeData && !_.isEmpty(timeData) ?
             timeData.doctorId : '';
-        console.log(doctorId)
 
         return (
             <React.Fragment>
@@ -63,6 +62,8 @@ class BookingModel extends Component {
 
                                 <ProfileDoctor
                                     doctorId={doctorId}
+                                    timeData={timeData}
+                                    isShowDescription={false}
                                 />
                             </div>
                             <div className='price'>
