@@ -63,6 +63,19 @@
             "price": "Giá khám",
             "more-details": "Xem chi tiết",
             "hide-details": "Ẩn chi tiết"
+        },
+        "booking-model": {
+            "header": "Đặt lịch khám",
+            "price": "Giá khám",
+            "fullName": "Họ và Tên",
+            "phoneNumber": "Số điện thoại",
+            "address": "Đia chỉ",
+            "email": "Địa chỉ Email",
+            "gender": "Giới tính",
+            "birthday": "Ngày sinh",
+            "reason": "Lý do khám bệnh",
+            "book": "Đặt lịch khám này",
+            "cancel": "Hủy"
         }
     },
     "admin": {

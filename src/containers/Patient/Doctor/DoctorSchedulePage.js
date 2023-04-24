@@ -197,7 +197,7 @@ class DoctorSchedulePage extends Component {
                 <BookingModel
                     isModalOpened={isModalOpened}
                     timeData={timeData}
-                    isModelClose={this.handleCloseBookingModel} />
+                    handleCloseBookingModel={this.handleCloseBookingModel} />
             </>
         );
     }

@@ -129,7 +129,7 @@ class ProfileDoctor extends Component {
                 </div>
 
                 <div className='price-text'>
-                    <label>Giá khám:</label>
+                    <label><FormattedMessage id="patient.booking-model.price" />:</label>
                     <span >
                         {doctorInfor && doctorInfor.priceData
                             && language === languages.VI &&
