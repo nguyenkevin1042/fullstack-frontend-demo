@@ -19,6 +19,7 @@ class BookingModel extends Component {
         super(props);
         this.state = {
             genderArr: [],
+            timeData: {},
 
             fullName: '',
             phoneNumber: '',
@@ -36,11 +37,13 @@ class BookingModel extends Component {
     componentDidMount() {
         this.props.getGendersStart();
 
+
         let doctorId = this.props.timeData && !_.isEmpty(this.props.timeData) ?
             this.props.timeData.doctorId : '';
 
         this.setState({
             doctorId: doctorId,
+            timeData: this.props.timeData,
             timeType: this.props.timeData.timeType,
             date: this.props.timeData.date
         })
@@ -122,7 +125,8 @@ class BookingModel extends Component {
             gender: this.state.gender,
             doctorId: this.state.doctorId,
             timeType: this.state.timeType,
-            date: this.state.date
+            date: this.state.date,
+            timeData: this.state.timeData
         });
         console.log(res)
 
@@ -130,7 +134,7 @@ class BookingModel extends Component {
             toast.success("Save Schedule Success");
             // this.props.handleCloseBookingModel();
         } else {
-            toast.success("Save Schedule Fail");
+            toast.error("Save Schedule Fail");
 
         }
     }
@@ -144,6 +148,8 @@ class BookingModel extends Component {
             timeData.doctorId : '';
 
         return (
+
+
             <React.Fragment>
 
                 <Modal isOpen={isModalOpened}
