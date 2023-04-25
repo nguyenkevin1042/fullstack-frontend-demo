@@ -12,6 +12,7 @@ import { languages } from '../../../../utils'
 import { savePatientScheduleAPI } from '../../../../services/userService';
 import * as actions from "../../../../store/actions";
 import { toast } from 'react-toastify';
+import moment from 'moment';
 
 
 class BookingModel extends Component {
@@ -114,7 +115,47 @@ class BookingModel extends Component {
 
     }
 
+    capitalizeFirstLetter = (string) => {
+        return string.charAt(0).toUpperCase() + string.slice(1);
+    }
+
+    buildTimeBooking = (timeData) => {
+        let language = this.props.lang;
+        let date = '';
+        let time = '';
+
+        if (timeData && !_.isEmpty(timeData)) {
+            date = language === languages.VI ?
+                moment.unix(timeData.date / 1000).format('dddd - DD/MM/YYYY')
+                :
+                moment.unix(timeData.date / 1000).locale('en').format('ddd - MM/DD/YYYY');
+            time = language === languages.VI ?
+                timeData.timeTypeData.valueVI : timeData.timeTypeData.valueEN;
+            ;
+
+        }
+
+        return time + ' - ' + this.capitalizeFirstLetter(date);
+
+    }
+
+    buildDoctorName = (timeData) => {
+        let language = this.props.lang;
+        let result = '';
+        let nameVI = timeData.doctorData.lastName + " " + timeData.doctorData.firstName
+        let nameEN = timeData.doctorData.firstName + " " + timeData.doctorData.lastName
+
+        if (timeData && !_.isEmpty(timeData)) {
+            result = language === languages.VI ? nameVI : nameEN;
+        }
+
+        return result;
+
+    }
+
     async handleSavePatientSchedule() {
+        let timeString = this.buildTimeBooking(this.props.timeData)
+        let doctorName = this.buildDoctorName(this.props.timeData)
         let res = await savePatientScheduleAPI({
             fullName: this.state.fullName,
             phoneNumber: this.state.phoneNumber,
@@ -126,7 +167,10 @@ class BookingModel extends Component {
             doctorId: this.state.doctorId,
             timeType: this.state.timeType,
             date: this.state.date,
-            timeData: this.state.timeData
+            timeData: this.state.timeData,
+            language: this.props.lang,
+            timeString: timeString,
+            doctorName: doctorName
         });
         console.log(res)
 
