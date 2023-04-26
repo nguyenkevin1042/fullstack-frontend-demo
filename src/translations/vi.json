@@ -76,6 +76,10 @@
             "reason": "Lý do khám bệnh",
             "book": "Đặt lịch khám này",
             "cancel": "Hủy"
+        },
+        "verify-booking": {
+            "success": "Xác nhận đặt lịch hẹn thành công",
+            "fail": "Lịch hẹn đã được xác nhận. Vui lòng không bấm vào đường link này nữa!"
         }
     },
     "admin": {

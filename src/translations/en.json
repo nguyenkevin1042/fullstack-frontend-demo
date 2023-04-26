@@ -76,6 +76,10 @@
             "reason": "Reason",
             "book": "Book this schedule",
             "cancel": "Cancel"
+        },
+        "verify-booking": {
+            "success": "Verify booking successful",
+            "fail": "This appointment has been verified"
         }
     },
     "admin": {

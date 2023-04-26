@@ -72,8 +72,11 @@ const getProfileDoctorByIdAPI = (doctorId) => {
 }
 
 const savePatientScheduleAPI = (dataInput) => {
-    console.log(dataInput)
     return axios.post("/api/patient-book-schedule", dataInput);
+}
+
+const verifyBookingAPI = (dataInput) => {
+    return axios.post("/api/verify-booking", dataInput);
 }
 
 
@@ -84,5 +87,6 @@ export {
     getAllDoctorsAPI, saveDoctorInforAPI,
     getDetailDoctorAPI, saveBulkScheduleAPI,
     getDoctorScheduleByIdAndDateAPI, getExtraInfoByIdAPI,
-    getProfileDoctorByIdAPI, savePatientScheduleAPI
+    getProfileDoctorByIdAPI, savePatientScheduleAPI,
+    verifyBookingAPI
 };
