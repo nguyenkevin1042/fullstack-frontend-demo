@@ -2,8 +2,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import * as actions from "../../../store/actions";
+import { CommonUtils } from '../../../utils'
 import { FormattedMessage } from 'react-intl';
 import Slider from "react-slick";
+import { getAllSpecialtyAPI } from '../../../services/userService';
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -30,9 +32,39 @@ function SamplePrevArrow(props) {
     );
 }
 
+
 class SpecialtySlider extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            dataSpecialty: []
+        };
+    }
+
+    async componentDidMount() {
+        let res = await getAllSpecialtyAPI();
+        if (res && res.errCode === 0) {
+            this.setState({
+                dataSpecialty: res.data
+            })
+        } else {
+            this.setState({
+                dataSpecialty: []
+            })
+        }
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if (prevProps.lang !== this.props.lang) {
+
+        }
+
+    }
+
 
     render() {
+        let { dataSpecialty } = this.state;
+
         return (
             <div className='section-share section-specialty'>
                 <div className='section-container'>
@@ -43,45 +75,27 @@ class SpecialtySlider extends Component {
 
                     <div className='section-slider'>
                         <Slider {...this.props.settings}>
-                            <div className='section-item'>
-                                <div className='bg' />
-                                <h3 className='change-color'>Cơ xương khớp 1</h3>
-                            </div>
+                            {dataSpecialty && dataSpecialty.length > 0 &&
+                                dataSpecialty.map((item, index) => {
 
-                            <div className='section-item'>
-                                <div className='bg' />
-                                <h3 className='change-color'>Cơ xương khớp 2</h3>
-                            </div>
+                                    return (
+                                        <div className='section-item' key={index}>
+                                            <div className='bg'
+                                                style={{
+                                                    backgroundImage: "url(" + item.image + ")"
+                                                }}
+                                            />
+                                            < h3 className='change-color'>{item.name}</h3>
+                                        </div>
+                                    )
 
-                            <div className='section-item'>
-                                <div className='bg' />
-                                <h3 className='change-color'>Cơ xương khớp 3</h3>
-                            </div>
-
-                            <div className='section-item'>
-                                <div className='bg' />
-                                <h3 className='change-color'>Cơ xương khớp 4</h3>
-                            </div>
-
-                            <div className='section-item'>
-                                <div className='bg' />
-                                <h3 className='change-color'>Cơ xương khớp 5</h3>
-                            </div>
-
-                            <div className='section-item'>
-                                <div className='bg' />
-                                <h3 className='change-color'>Cơ xương khớp 6</h3>
-                            </div>
-
-                            <div className='section-item'>
-                                <div className='bg' />
-                                <h3 className='change-color'>Cơ xương khớp 7</h3>
-                            </div>
+                                })
+                            }
                         </Slider>
                     </div>
 
 
-                </div>
+                </div >
             </div >
         );
 

@@ -52,19 +52,25 @@ class ManageSpecialty extends Component {
             let objectURL = URL.createObjectURL(file);
 
             let base64 = await CommonUtils.getBase64(file);
-            console.log(objectURL)
-            console.log(data)
+
             this.setState({
-                imageBase64: objectURL,
-                //imageBase64: base64.result
+                imageBase64: objectURL
             })
         }
+        console.log("imageBase64: ", this.state.imageBase64)
+
     }
 
     handleSaveNewSpecialty = async () => {
         let res = await createNewSpecialtyAPI(this.state);
         if (res && res.errCode === 0) {
             toast.success("Create new specialty successful")
+            this.setState({
+                name: '',
+                imageBase64: '',
+                contentHTML: '',
+                contentMarkdown: ''
+            })
         } else {
             toast.error("Create new specialty fail")
 

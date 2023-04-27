@@ -80,8 +80,11 @@ const verifyBookingAPI = (dataInput) => {
 }
 
 const createNewSpecialtyAPI = (dataInput) => {
-    console.log(dataInput)
     return axios.post("/api/create-new-specialty", dataInput);
+}
+
+const getAllSpecialtyAPI = () => {
+    return axios.get("/api/get-all-specialty");
 }
 
 
@@ -93,5 +96,6 @@ export {
     getDetailDoctorAPI, saveBulkScheduleAPI,
     getDoctorScheduleByIdAndDateAPI, getExtraInfoByIdAPI,
     getProfileDoctorByIdAPI, savePatientScheduleAPI,
-    verifyBookingAPI, createNewSpecialtyAPI
+    verifyBookingAPI, createNewSpecialtyAPI,
+    getAllSpecialtyAPI
 };

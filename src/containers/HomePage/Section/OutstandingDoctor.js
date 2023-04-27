@@ -81,6 +81,7 @@ class OutstandingDoctorSection extends Component {
                                     if (item.image) {
                                         imageBase64 = new Buffer(item.image, 'base64').toString('binary');
                                     }
+                                    // console.log("OutstandingDoctorSection: ", imageBase64)
 
                                     let textVI = item.positionData.valueVI + " " +
                                         item.lastName + " " + item.firstName;
