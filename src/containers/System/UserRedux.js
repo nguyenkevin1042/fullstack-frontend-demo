@@ -89,6 +89,7 @@ class UserRedux extends Component {
         let data = event.target.files;
         let file = data[0];
 
+
         if (file) {
             let objectURL = URL.createObjectURL(file);
 
@@ -99,6 +100,7 @@ class UserRedux extends Component {
                 avatar: base64.result
             })
         }
+
     }
 
     openPreviewImage = () => {

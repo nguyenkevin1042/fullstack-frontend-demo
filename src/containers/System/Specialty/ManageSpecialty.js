@@ -49,15 +49,11 @@ class ManageSpecialty extends Component {
         let file = data[0];
 
         if (file) {
-            let objectURL = URL.createObjectURL(file);
-
             let base64 = await CommonUtils.getBase64(file);
-
             this.setState({
-                imageBase64: objectURL
+                imageBase64: base64.result
             })
         }
-        console.log("imageBase64: ", this.state.imageBase64)
 
     }
 
