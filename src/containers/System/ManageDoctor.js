@@ -20,6 +20,8 @@ class ManageDoctor extends Component {
         super(props);
         this.state = {
             doctorId: '',
+            clinicId: '',
+            specialtyId: '',
             contentMarkdown: '',
             contentHTML: '',
             selectedDoctor: '',
@@ -35,6 +37,10 @@ class ManageDoctor extends Component {
             nameClinic: '',
             addressClinic: '',
             note: '',
+            listClinic: [],
+            listSpecialty: [],
+            selectedClinic: '',
+            selectedSpecialty: '',
 
             hasOldData: false
         };
@@ -64,7 +70,7 @@ class ManageDoctor extends Component {
 
         if (prevProps.allPayments !== this.props.allPayments
             || prevProps.lang !== this.props.lang) {
-            let dataSelect = this.buildDataInputSelect(this.props.allPayments);
+            let dataSelect = this.buildDataInputSelect(this.props.allPayments, "payment");
             this.setState({
                 listPayment: dataSelect
             })
@@ -72,11 +78,21 @@ class ManageDoctor extends Component {
 
         if (prevProps.allProvinces !== this.props.allProvinces
             || prevProps.lang !== this.props.lang) {
-            let dataSelect = this.buildDataInputSelect(this.props.allProvinces);
+            let dataSelect = this.buildDataInputSelect(this.props.allProvinces, "province");
             this.setState({
                 listProvince: dataSelect
             })
         }
+
+        if (prevProps.allSpecialties !== this.props.allSpecialties
+            || prevProps.lang !== this.props.lang) {
+            let dataSelect = this.buildDataInputSelect(this.props.allSpecialties, 'specialty');
+            this.setState({
+                listSpecialty: dataSelect
+            })
+        }
+
+
     }
 
     handleEditorChange = (obj) => {
@@ -90,6 +106,7 @@ class ManageDoctor extends Component {
         let hasOldData = this.state.hasOldData;
         this.props.saveDoctorInformation({
             doctorId: this.state.doctorId,
+            doctorId: this.state.doctorId,
             contentHTML: this.state.contentHTML,
             contentMarkdown: this.state.contentMarkdown,
             description: this.state.description,
@@ -99,12 +116,17 @@ class ManageDoctor extends Component {
             nameClinic: this.state.nameClinic,
             addressClinic: this.state.addressClinic,
             note: this.state.note,
+            selectedSpecialty: this.state.selectedSpecialty.key,
+            // selectedClinic: this.state.selectedProvince.key,
+            selectedClinic: '',
             action: hasOldData === true ? 'EDIT' : 'CREATE'
         })
     }
 
     handleChange = async (selectedDoctor) => {
         let res = await getDetailDoctorAPI(selectedDoctor.key);
+
+
         let { listPrice, listPayment, listProvince } = this.state
 
         if (res && res.errCode === 0 && res.data && res.data.Markdown
@@ -113,13 +135,12 @@ class ManageDoctor extends Component {
             && res.data.Markdown.description != null) {
             let markdown = res.data.Markdown;
 
-
-            console.log(res.data.Doctor_Infor)
             let resAddressClinic = '', resNameClinic = '',
                 resNote = '', resPriceId = '',
                 resPaymentId = '', resProvinceId = '',
                 resSelectedPrice = '', resSelectedPayment = '',
                 resSelectedProvince = '';
+
             if (res.data.Doctor_Infor) {
                 resAddressClinic = res.data.Doctor_Infor.addressClinic;
                 resNameClinic = res.data.Doctor_Infor.nameClinic;
@@ -170,7 +191,7 @@ class ManageDoctor extends Component {
                 hasOldData: false
             });
         }
-        console.log(this.state)
+        console.log("handleChange: ", this.state)
     }
 
     handleChangeSelectDoctorInfor = (selectedOption, name) => {
@@ -215,26 +236,36 @@ class ManageDoctor extends Component {
                     result.push(obj);
                 });
             }
-            inputData.map((item, index) => {
-                let obj = {};
-                let labelVI = item.valueVI;
-                let labelEN = item.valueEN;
+            if (type === "payment") {
+                inputData.map((item, index) => {
+                    let obj = {};
+                    let labelVI = item.valueVI;
+                    let labelEN = item.valueEN;
 
-                obj.key = item.keyMap;
-                obj.label = language === languages.VI ? labelVI : labelEN;
-                result.push(obj);
-            });
-            // inputData.map((item, index) => {
-            //     let obj = {};
-            //     let labelVI = type === "doctors" ? item.lastName + " " + item.firstName : item.valueVI;
-            //     let labelEN = type === "doctors" ? item.firstName + " " + item.lastName : item.valueEN;
+                    obj.key = item.keyMap;
+                    obj.label = language === languages.VI ? labelVI : labelEN;
+                    result.push(obj);
+                });
+            }
+            if (type === "province") {
+                inputData.map((item, index) => {
+                    let obj = {};
+                    let labelVI = item.valueVI;
+                    let labelEN = item.valueEN;
 
-            //     obj.key = item.id;
-            //     obj.label = language === languages.VI ? labelVI : labelEN;
-            //     result.push(obj);
-            // });
-
-
+                    obj.key = item.keyMap;
+                    obj.label = language === languages.VI ? labelVI : labelEN;
+                    result.push(obj);
+                });
+            }
+            if (type === "specialty") {
+                inputData.map((item, index) => {
+                    let obj = {};
+                    obj.key = item.id;
+                    obj.label = item.name
+                    result.push(obj);
+                });
+            }
         }
         return result;
     }
@@ -336,6 +367,34 @@ class ManageDoctor extends Component {
                                 value={this.state.note}
                                 onChange={(event) => this.handleOnChangeText(event, 'note')} />
                         </div>
+                        <div className='col-4 form-group'>
+                            <label><FormattedMessage id='admin.manage-doctor.specialty' /></label>
+                            <Select
+                                value={this.state.selectedSpecialty}
+                                onChange={this.handleChangeSelectDoctorInfor}
+                                options={this.state.listSpecialty}
+                                placeholder={
+                                    language === languages.VI ?
+                                        "Chọn chuyên khoa" :
+                                        "Choose Specialty"
+                                }
+                                name="selectedSpecialty"
+                            />
+                        </div>
+                        <div className='col-4 form-group'>
+                            <label><FormattedMessage id='admin.manage-doctor.clinic' /></label>
+                            <Select
+                                value={this.state.selectedClinic}
+                                onChange={this.handleChangeSelectDoctorInfor}
+                                options={this.state.listClinic}
+                                placeholder={
+                                    language === languages.VI ?
+                                        "Chọn phòng khám" :
+                                        "Choose Clinic"
+                                }
+                                name="selectedClinic"
+                            />
+                        </div>
                     </div>
 
                     <div className='manage-doctors-editor'>
@@ -370,7 +429,8 @@ const mapStateToProps = state => {
         allDoctors: state.admin.allDoctors,
         allPrices: state.admin.allPrices,
         allPayments: state.admin.allPayments,
-        allProvinces: state.admin.allProvinces
+        allProvinces: state.admin.allProvinces,
+        allSpecialties: state.admin.allSpecialties
     };
 };
 

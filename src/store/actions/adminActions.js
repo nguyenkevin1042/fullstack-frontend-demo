@@ -3,7 +3,7 @@ import {
     getAllCodesAPI, createNewUserAPI,
     getAllUsersAPI, deleteUserAPI, editUserAPI,
     getTopDoctorsHomeAPI, getAllDoctorsAPI,
-    saveDoctorInforAPI
+    saveDoctorInforAPI, getAllSpecialtyAPI
 } from '../../services/userService';
 import { toast } from 'react-toastify';
 
@@ -315,13 +315,17 @@ export const getRequiredDoctorInfo = () => {
             let resPrice = await getAllCodesAPI('price');
             let resPayment = await getAllCodesAPI('payment');
             let resProvince = await getAllCodesAPI('province');
+            let resSpecialty = await getAllSpecialtyAPI();
+
             if (resPrice && resPrice.errCode === 0 &&
                 resPayment && resPayment.errCode === 0 &&
-                resProvince && resProvince.errCode === 0) {
+                resProvince && resProvince.errCode === 0 &&
+                resSpecialty && resSpecialty.errCode === 0) {
                 let data = {
                     resPrice: resPrice.data,
                     resPayment: resPayment.data,
-                    resProvince: resProvince.data
+                    resProvince: resProvince.data,
+                    resSpecialty: resSpecialty.data
                 }
                 dispatch(getRequiredDoctorInfoSuccess(data));
             } else {
@@ -338,7 +342,8 @@ export const getRequiredDoctorInfoSuccess = (data) => ({
     type: actionTypes.FETCH_DOCTOR_INFO_SUCCESS,
     price: data.resPrice,
     payment: data.resPayment,
-    province: data.resProvince
+    province: data.resProvince,
+    specialty: data.resSpecialty
 })
 
 export const getRequiredDoctorInfoFail = () => ({

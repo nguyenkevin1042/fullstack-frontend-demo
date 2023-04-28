@@ -55,9 +55,10 @@ class OutstandingDoctorSection extends Component {
     }
 
     handleViewDetailDoctor = (doctor) => {
+        if (this.props.history) {
+            this.props.history.push("/detail-doctor/" + doctor.id);
 
-        this.props.history.push("/detail-doctor/" + doctor.id);
-
+        }
     }
 
     render() {
@@ -106,65 +107,7 @@ class OutstandingDoctorSection extends Component {
                                     );
                                 })
                             }
-                            {/* <div className='section-item doctor-item'>
-                                <div className='customize-border'>
-                                    <div className='bg' />
-                                    <div className='position text-center'>
-                                        <div className='change-color'>Phó Giáo sư, Tiến sĩ, Bác sĩ Nguyễn Trọng Hưng</div>
-                                        <div>Thần kinh</div>
-                                    </div>
-                                </div>
-                            </div>
 
-                            <div className='section-item doctor-item'>
-                                <div className='customize-border'>
-                                    <div className='bg' />
-                                    <div className='position text-center'>
-                                        <div className='change-color'>Phó Giáo sư, Tiến sĩ, Bác sĩ Nguyễn Trọng Hưng</div>
-                                        <div>Thần kinh</div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div className='section-item doctor-item'>
-                                <div className='customize-border'>
-                                    <div className='bg' />
-                                    <div className='position text-center'>
-                                        <div className='change-color'>Phó Giáo sư, Tiến sĩ, Bác sĩ Nguyễn Trọng Hưng</div>
-                                        <div>Thần kinh</div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div className='section-item doctor-item'>
-                                <div className='customize-border'>
-                                    <div className='bg' />
-                                    <div className='position text-center'>
-                                        <div className='change-color'>Phó Giáo sư, Tiến sĩ, Bác sĩ Nguyễn Trọng Hưng</div>
-                                        <div>Thần kinh</div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div className='section-item doctor-item'>
-                                <div className='customize-border'>
-                                    <div className='bg' />
-                                    <div className='position text-center'>
-                                        <div className='change-color'>Phó Giáo sư, Tiến sĩ, Bác sĩ Nguyễn Trọng Hưng</div>
-                                        <div>Thần kinh</div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div className='section-item doctor-item'>
-                                <div className='customize-border'>
-                                    <div className='bg' />
-                                    <div className='position text-center'>
-                                        <div className='change-color'>Phó Giáo sư, Tiến sĩ, Bác sĩ Nguyễn Trọng Hưng</div>
-                                        <div>Thần kinh</div>
-                                    </div>
-                                </div>
-                            </div> */}
                         </Slider>
                     </div>
 

@@ -9,6 +9,7 @@ import { getAllSpecialtyAPI } from '../../../services/userService';
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { withRouter } from 'react-router';
 
 function SampleNextArrow(props) {
     const { className, style, onClick } = props;
@@ -61,6 +62,12 @@ class SpecialtySlider extends Component {
 
     }
 
+    handleViewDetailSpecialty = (specialty) => {
+        if (this.props.history) {
+            this.props.history.push("/detail-specialty/" + specialty.id);
+        }
+    }
+
 
     render() {
         let { dataSpecialty } = this.state;
@@ -79,7 +86,8 @@ class SpecialtySlider extends Component {
                                 dataSpecialty.map((item, index) => {
                                     console.log(index, item.image)
                                     return (
-                                        <div className='section-item' key={index}>
+                                        <div className='section-item' key={index}
+                                            onClick={() => this.handleViewDetailSpecialty(item)}>
                                             <div className='bg'
                                                 style={{
                                                     backgroundImage: "url(" + item.image + ")"
@@ -116,4 +124,4 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(SpecialtySlider);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(SpecialtySlider));
