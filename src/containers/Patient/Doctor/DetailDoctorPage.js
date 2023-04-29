@@ -6,7 +6,7 @@ import './DetailDoctorPage.scss';
 import { getDetailDoctorAPI } from '../../../services/userService';
 // import * as actions from "../store/actions";
 import { languages } from '../../../utils'
-import DoctorSchedulePage from './DoctorSchedulePage';
+import DoctorScheduleComponent from './DoctorScheduleComponent';
 import DetailDoctorExtra from './DetailDoctorExtra.js';
 
 
@@ -86,7 +86,7 @@ class DetailDoctorPage extends Component {
 
                     <div className='schedule-doctor'>
                         <div className='content-left'>
-                            <DoctorSchedulePage
+                            <DoctorScheduleComponent
                                 doctorIdFromDetailDoctorPage={this.state.currentDoctorId} />
                         </div>
                         <div className='content-right'>

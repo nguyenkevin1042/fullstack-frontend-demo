@@ -104,6 +104,7 @@ class ProfileDoctor extends Component {
                     >
 
                     </div>
+
                     <div className='content-right'>
                         <div className='up'>
                             {language === languages.VI ? textVI : textEN}
@@ -121,31 +122,34 @@ class ProfileDoctor extends Component {
                                     {this.renderTimeBooking(timeData)}
                                 </>
                             }
-
-
                         </div>
                     </div>
-
                 </div>
 
+
                 <div className='price-text'>
-                    <label><FormattedMessage id="patient.booking-model.price" />:</label>
-                    <span >
-                        {doctorInfor && doctorInfor.priceData
-                            && language === languages.VI &&
-                            <NumericFormat value={doctorInfor.priceData.valueVI}
-                                displayType={'text'}
-                                thousandSeparator={true}
-                                suffix={'VND'} />
-                        }
-                        {doctorInfor && doctorInfor.priceData
-                            && language === languages.EN &&
-                            <NumericFormat value={doctorInfor.priceData.valueEN}
-                                displayType={'text'}
-                                thousandSeparator={true}
-                                suffix={'$'} />
-                        }
-                    </span>
+                    {isShowDescription === false &&
+                        <>
+                            <label><FormattedMessage id="patient.booking-model.price" />:</label>
+                            <span >
+                                {doctorInfor && doctorInfor.priceData
+                                    && language === languages.VI &&
+                                    <NumericFormat value={doctorInfor.priceData.valueVI}
+                                        displayType={'text'}
+                                        thousandSeparator={true}
+                                        suffix={'VND'} />
+                                }
+                                {doctorInfor && doctorInfor.priceData
+                                    && language === languages.EN &&
+                                    <NumericFormat value={doctorInfor.priceData.valueEN}
+                                        displayType={'text'}
+                                        thousandSeparator={true}
+                                        suffix={'$'} />
+                                }
+                            </span>
+                        </>
+                    }
+
                 </div>
             </div>
 

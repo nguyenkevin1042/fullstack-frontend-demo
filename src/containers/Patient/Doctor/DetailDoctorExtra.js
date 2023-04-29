@@ -21,7 +21,15 @@ class DetailDoctorExtra extends Component {
         };
     }
 
-    componentDidMount() {
+    async componentDidMount() {
+        if (this.props.doctorIdFromDetailDoctorPage) {
+            let doctorId = this.props.doctorIdFromDetailDoctorPage;
+            let res = await getExtraInfoByIdAPI(doctorId);
+
+            this.setState({
+                extraInfo: res.data ? res.data : {}
+            })
+        }
 
     }
 

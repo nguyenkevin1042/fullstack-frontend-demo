@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import Select from 'react-select';
-import './DoctorSchedulePage.scss';
+import './DoctorScheduleComponent.scss';
 import { FormattedMessage } from 'react-intl';
 // import * as actions from "../store/actions";
 import { languages } from '../../../utils'
@@ -10,7 +10,7 @@ import localization from 'moment/locale/vi';
 import { getDoctorScheduleByIdAndDateAPI } from '../../../services/userService'
 import BookingModel from './Model/BookingModel';
 
-class DoctorSchedulePage extends Component {
+class DoctorScheduleComponent extends Component {
 
 
     constructor(props) {
@@ -218,4 +218,4 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(DoctorSchedulePage);
+export default connect(mapStateToProps, mapDispatchToProps)(DoctorScheduleComponent);

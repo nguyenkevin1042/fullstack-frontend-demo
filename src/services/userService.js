@@ -87,6 +87,13 @@ const getAllSpecialtyAPI = () => {
     return axios.get("/api/get-all-specialty");
 }
 
+const getDetailSpecialtyByIdAPI = (inputData) => {
+    return axios.get("/api/get-detail-specialty-by-id",
+        { params: { id: inputData.id, location: inputData.location } }
+    );
+
+}
+
 
 export {
     handleLoginAPI, getAllUsersAPI, createNewUserAPI,
@@ -97,5 +104,5 @@ export {
     getDoctorScheduleByIdAndDateAPI, getExtraInfoByIdAPI,
     getProfileDoctorByIdAPI, savePatientScheduleAPI,
     verifyBookingAPI, createNewSpecialtyAPI,
-    getAllSpecialtyAPI
+    getAllSpecialtyAPI, getDetailSpecialtyByIdAPI
 };
