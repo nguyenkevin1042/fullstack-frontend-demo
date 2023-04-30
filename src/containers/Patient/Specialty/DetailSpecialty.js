@@ -20,6 +20,7 @@ class DetailSpecialty extends Component {
             arrDoctorId: [],
             dataDetailSpecialty: {},
             listProvince: [],
+            selectedProvince: ''
         };
     }
 
@@ -27,10 +28,10 @@ class DetailSpecialty extends Component {
         this.props.getRequiredDoctorInfo();
 
         if (this.props.match && this.props.match.params && this.props.match.params.id) {
-            let doctorId = this.props.match.params.id;
+            let specialtyId = this.props.match.params.id;
 
             let res = await getDetailSpecialtyByIdAPI({
-                id: doctorId,
+                id: specialtyId,
                 location: 'ALL'
             });
 
@@ -56,9 +57,6 @@ class DetailSpecialty extends Component {
                 listProvince: dataSelect
             })
         }
-
-        console.log(this.state)
-
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
@@ -136,6 +134,34 @@ class DetailSpecialty extends Component {
         return result;
     }
 
+    //handleChange = (selectedOption, name)
+    handleChange = async (selectedOption) => {
+
+        if (this.props.match && this.props.match.params && this.props.match.params.id) {
+            let specialtyId = this.props.match.params.id;
+
+            let res = await getDetailSpecialtyByIdAPI({
+                id: specialtyId,
+                location: selectedOption.key
+            });
+
+
+            if (res && res.errCode == 0) {
+                let resData = res.data;
+                if (resData && !_.isEmpty(resData)) {
+                    let resDataDoctors = resData.doctorSpecialty;
+
+                    this.setState({
+                        arrDoctorId: resDataDoctors,
+                        dataDetailSpecialty: res.data
+                    })
+                }
+            }
+            console.log("check state handleChange: ", this.state)
+
+        }
+    }
+
 
     render() {
         let { arrDoctorId, dataDetailSpecialty } = this.state;
@@ -161,19 +187,11 @@ class DetailSpecialty extends Component {
                     <div className='detail-specialty-doctors'>
                         <div className='select-province'>
                             <Select
-                                styles={{
-                                    control: (baseStyles, state) => ({
-                                        ...baseStyles,
-                                        width: "max-content",
-                                        minWidth: "20%"
-                                    }),
-                                }}
-                                autosize={false}
-                                // value={this.state.selectedOption}
-                                // onChange={this.handleChange}
+                                value={this.state.selectedProvince}
+                                onChange={this.handleChange}
                                 options={this.state.listProvince}
-                            // placeholder={<FormattedMessage id='admin.manage-doctor.choose-doctor' />}
-                            // name="selectedOption"
+                                // placeholder={<FormattedMessage id='admin.manage-doctor.choose-doctor' />}
+                                name="selectedProvince"
                             />
                         </div>
 
@@ -188,6 +206,7 @@ class DetailSpecialty extends Component {
                                                     doctorId={item.doctorId}
                                                     // timeData={timeData}
                                                     isShowDescription={true}
+                                                    isShowMore={true}
                                                 />
                                             </div>
                                             <div className='doctor-item-content-right'>

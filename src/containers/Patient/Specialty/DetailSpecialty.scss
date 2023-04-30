@@ -3,12 +3,12 @@
 
     .detail-specialty-description{
         height: 100%;
-        padding: 15px 20px;
-        border: 1px solid red;
+        padding: 20px 50px;
 
         .detail-specialty-title{
             font-weight: 600;
             font-size: 25px;
+            padding-bottom: 20px;
         }
 
     }
@@ -17,7 +17,10 @@
         background-color: #eee;
         // padding: 20px 30px;
         .select-province{
-            padding: 20px 40px;
+            width: 250px;
+            margin-left: 40px;
+            padding-top: 20px;
+
         }
 
         .detail-specialty-doctor-item{

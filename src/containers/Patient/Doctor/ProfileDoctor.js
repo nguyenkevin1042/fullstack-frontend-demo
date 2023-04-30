@@ -7,6 +7,7 @@ import NumericFormat from 'react-number-format';
 import { getProfileDoctorByIdAPI } from '../../../services/userService';
 import _ from 'lodash';
 import moment from 'moment';
+import { Link } from 'react-router-dom';
 
 class ProfileDoctor extends Component {
     constructor(props) {
@@ -80,7 +81,7 @@ class ProfileDoctor extends Component {
     render() {
         let { profileData } = this.state;
         let doctorInfor = profileData.Doctor_Infor;
-        let { isShowDescription, timeData } = this.props;
+        let { isShowDescription, timeData, isShowMore, doctorId } = this.props;
         let language = this.props.lang;
 
         let doctorImg = profileData && profileData.image ? profileData.image : '';
@@ -148,6 +149,13 @@ class ProfileDoctor extends Component {
                                 }
                             </span>
                         </>
+                    }
+
+                    {isShowMore === true &&
+                        <div className='view-detail-doctor'>
+                            <Link to={"/detail-doctor/" + doctorId}>Xem thêm</Link>
+                            {/* <a href={"/detail-doctor/" + doctorId}>Xem thêm</a> */}
+                        </div>
                     }
 
                 </div>
