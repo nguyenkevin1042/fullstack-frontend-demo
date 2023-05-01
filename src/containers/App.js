@@ -21,6 +21,7 @@ import ConfirmModal from '../components/ConfirmModal';
 import Doctor from '../routes/Doctor';
 import VerifyBooking from './Patient/VerifyBooking';
 import DetailSpecialty from './Patient/Specialty/DetailSpecialty';
+import DetailClinic from './Patient/Clinic/DetailClinic';
 
 class App extends Component {
 
@@ -59,6 +60,7 @@ class App extends Component {
                                     <Route path={path.MANAGE_SCHEDULE} component={userIsAuthenticated(Doctor)} />
                                     <Route path={path.VERIFY_BOOKING} component={VerifyBooking} />
                                     <Route path={path.DETAIL_SPECIALTY} component={DetailSpecialty} />
+                                    <Route path={path.DETAIL_CLINIC} component={DetailClinic} />
                                 </Switch>
                             </CustomScrollbars>
                         </div>

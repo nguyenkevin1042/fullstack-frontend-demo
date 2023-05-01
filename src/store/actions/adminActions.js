@@ -3,7 +3,8 @@ import {
     getAllCodesAPI, createNewUserAPI,
     getAllUsersAPI, deleteUserAPI, editUserAPI,
     getTopDoctorsHomeAPI, getAllDoctorsAPI,
-    saveDoctorInforAPI, getAllSpecialtyAPI
+    saveDoctorInforAPI, getAllSpecialtyAPI,
+    getAllClinicAPI
 } from '../../services/userService';
 import { toast } from 'react-toastify';
 
@@ -316,17 +317,21 @@ export const getRequiredDoctorInfo = () => {
             let resPayment = await getAllCodesAPI('payment');
             let resProvince = await getAllCodesAPI('province');
             let resSpecialty = await getAllSpecialtyAPI();
+            let resClinic = await getAllClinicAPI();
 
             if (resPrice && resPrice.errCode === 0 &&
                 resPayment && resPayment.errCode === 0 &&
                 resProvince && resProvince.errCode === 0 &&
-                resSpecialty && resSpecialty.errCode === 0) {
+                resSpecialty && resSpecialty.errCode === 0 &&
+                resClinic && resClinic.errCode === 0) {
                 let data = {
                     resPrice: resPrice.data,
                     resPayment: resPayment.data,
                     resProvince: resProvince.data,
-                    resSpecialty: resSpecialty.data
+                    resSpecialty: resSpecialty.data,
+                    resClinic: resClinic.data
                 }
+
                 dispatch(getRequiredDoctorInfoSuccess(data));
             } else {
                 dispatch(getRequiredDoctorInfoFail());
@@ -343,7 +348,8 @@ export const getRequiredDoctorInfoSuccess = (data) => ({
     price: data.resPrice,
     payment: data.resPayment,
     province: data.resProvince,
-    specialty: data.resSpecialty
+    specialty: data.resSpecialty,
+    clinic: data.resClinic
 })
 
 export const getRequiredDoctorInfoFail = () => ({

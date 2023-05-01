@@ -94,6 +94,22 @@ const getDetailSpecialtyByIdAPI = (inputData) => {
 
 }
 
+const createNewClinicAPI = (dataInput) => {
+    return axios.post("/api/create-new-clinic", dataInput);
+}
+
+const getAllClinicAPI = () => {
+    return axios.get("/api/get-all-clinic");
+}
+
+const getDetailClinicByIdAPI = (inputData) => {
+    return axios.get("/api/get-detail-clinic-by-id",
+        { params: { id: inputData.id } }
+    );
+
+}
+
+
 
 export {
     handleLoginAPI, getAllUsersAPI, createNewUserAPI,
@@ -104,5 +120,7 @@ export {
     getDoctorScheduleByIdAndDateAPI, getExtraInfoByIdAPI,
     getProfileDoctorByIdAPI, savePatientScheduleAPI,
     verifyBookingAPI, createNewSpecialtyAPI,
-    getAllSpecialtyAPI, getDetailSpecialtyByIdAPI
+    getAllSpecialtyAPI, getDetailSpecialtyByIdAPI,
+    createNewClinicAPI, getAllClinicAPI,
+    getDetailClinicByIdAPI
 };

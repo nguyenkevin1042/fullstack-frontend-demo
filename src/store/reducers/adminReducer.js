@@ -12,6 +12,7 @@ const initialState = {
     allPayments: [],
     allProvinces: [],
     allSpecialties: [],
+    allClinics: [],
     isLoadingGenders: false
 }
 
@@ -112,6 +113,7 @@ const adminReducer = (state = initialState, action) => {
             state.allPayments = action.payment;
             state.allProvinces = action.province;
             state.allSpecialties = action.specialty;
+            state.allClinics = action.clinic;
             return {
                 ...state
             }

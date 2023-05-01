@@ -84,7 +84,7 @@ class SpecialtySlider extends Component {
                         <Slider {...this.props.settings}>
                             {dataSpecialty && dataSpecialty.length > 0 &&
                                 dataSpecialty.map((item, index) => {
-                                    console.log(index, item.image)
+
                                     return (
                                         <div className='section-item' key={index}
                                             onClick={() => this.handleViewDetailSpecialty(item)}>
