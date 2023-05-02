@@ -273,9 +273,6 @@ class BookingModel extends Component {
                                         value={reason}
                                         onChange={(event) => this.handleOnChangeInput(event, 'reason')} />
                                 </div>
-
-
-
                             </div>
 
                         </div>
