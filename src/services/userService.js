@@ -109,7 +109,15 @@ const getDetailClinicByIdAPI = (inputData) => {
 
 }
 
-
+const getListPatientAPI = (inputData) => {
+    return axios.get("/api/get-list-patient",
+        {
+            params: {
+                doctorId: inputData.doctorId,
+                date: inputData.date
+            }
+        });
+}
 
 export {
     handleLoginAPI, getAllUsersAPI, createNewUserAPI,
@@ -122,5 +130,5 @@ export {
     verifyBookingAPI, createNewSpecialtyAPI,
     getAllSpecialtyAPI, getDetailSpecialtyByIdAPI,
     createNewClinicAPI, getAllClinicAPI,
-    getDetailClinicByIdAPI
+    getDetailClinicByIdAPI, getListPatientAPI
 };

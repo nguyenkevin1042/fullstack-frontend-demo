@@ -106,7 +106,7 @@ class ManageSchedule extends Component {
         let selectedTime = [];
 
         let fomattedDate = new Date(currentDate).getTime();
-        console.log('fomattedDate: ', fomattedDate)
+
         if (selectedDoctor && _.isEmpty(selectedDoctor)) {
             toast.error('Missing doctor');
             return;
