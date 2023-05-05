@@ -119,6 +119,10 @@ const getListPatientAPI = (inputData) => {
         });
 }
 
+const sendRemedyAPI = (dataInput) => {
+    return axios.post("/api/send-remedy", dataInput);
+}
+
 export {
     handleLoginAPI, getAllUsersAPI, createNewUserAPI,
     deleteUserAPI, editUserAPI,
@@ -130,5 +134,6 @@ export {
     verifyBookingAPI, createNewSpecialtyAPI,
     getAllSpecialtyAPI, getDetailSpecialtyByIdAPI,
     createNewClinicAPI, getAllClinicAPI,
-    getDetailClinicByIdAPI, getListPatientAPI
+    getDetailClinicByIdAPI, getListPatientAPI,
+    sendRemedyAPI
 };
